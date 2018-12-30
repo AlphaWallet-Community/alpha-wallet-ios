@@ -46,6 +46,7 @@
 "request.myAddressIs.label.title" = "我的 %1$@ 地址是：%2$@";
 "Retry" = "重试";
 "Send" = "发送";
+"Receive" = "Receive";
 "send.error.emptyClipBoard" = "空白的剪贴板";
 "send.error.invalidAddress" = "无效的地址";
 "send.error.wrongInput" = "错误的输入";
@@ -306,3 +307,4 @@
 "camera.qrCode.denied.prompt.button" = "打开设置";
 "openSeaNonFungibleTokens.url.open" = "在 %@ 应用内打开";
 "address.ens.labelMessage" = "Ethereum address or ENS name";
+"recent.transactions" = "Recent Transactions";

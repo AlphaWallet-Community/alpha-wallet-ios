@@ -53,6 +53,7 @@
 "request.myAddressIs.label.title" = "私の %1$@ のアドレス: %2$@";
 "Retry" = "再試行";
 "Send" = "送信";
+"Receive" = "Receive";
 "send.error.emptyClipBoard" = "クリップボードが空です";
 "send.error.invalidAddress" = "無効なアドレス";
 "send.error.invalidAmount" = "無効な金額";
@@ -306,3 +307,4 @@
 "camera.qrCode.denied.prompt.button" = "設定を開く";
 "openSeaNonFungibleTokens.url.open" = "%@ で開く";
 "address.ens.labelMessage" = "Ethereum address or ENS name";
+"recent.transactions" = "Recent Transactions";

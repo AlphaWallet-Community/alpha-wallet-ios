@@ -53,6 +53,7 @@
 "request.myAddressIs.label.title" = "내 %1$@ 주소: %2$@";
 "Retry" = "다시 시도";
 "Send" = "보내기";
+"Receive" = "Receive";
 "send.error.emptyClipBoard" = "빈 클립보드";
 "send.error.invalidAddress" = "잘못된 주소";
 "send.error.invalidAmount" = "잘못된 금액";
@@ -306,3 +307,4 @@
 "camera.qrCode.denied.prompt.button" = "설정 열기";
 "openSeaNonFungibleTokens.url.open" = "%@에서 열기";
 "address.ens.labelMessage" = "Ethereum address or ENS name";
+"recent.transactions" = "Recent Transactions";

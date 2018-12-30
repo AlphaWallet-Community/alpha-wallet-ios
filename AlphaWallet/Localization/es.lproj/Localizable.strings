@@ -53,6 +53,7 @@
 "request.myAddressIs.label.title" = "Mi dirección de %1$@ es: %2$@";
 "Retry" = "Reintentar";
 "Send" = "Enviar";
+"Receive" = "Receive";
 "send.error.emptyClipBoard" = "Vaciar portapapeles";
 "send.error.invalidAddress" = "Dirección no válida";
 "send.error.invalidAmount" = "Cantidad no válida";
@@ -306,3 +307,4 @@
 "camera.qrCode.denied.prompt.button" = "Abrir Ajustes";
 "openSeaNonFungibleTokens.url.open" = "Abrir en %@";
 "address.ens.labelMessage" = "Ethereum dirección o ENS nombre";
+"recent.transactions" = "Recent Transactions";
