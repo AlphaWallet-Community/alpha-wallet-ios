@@ -89,10 +89,30 @@ private class PrivateXMLHandler {
                XMLHandler.getBitMaskFrom(fromAttributeTypeElement: each, namespacePrefix: rootNamespacePrefix, namespaces: namespaces) != nil {
                 fields[id] = AssetAttribute(attribute: each, rootNamespacePrefix: rootNamespacePrefix, namespaces: namespaces, lang: lang)
             } else if let id = each["id"],
-                      let originElement = XMLHandler.getOriginElement(fromAttributeTypeElement: each, namespacePrefix: rootNamespacePrefix, namespaces: namespaces),
+                      let originElement = XMLHandler.getOriginElement(
+                              fromAttributeTypeElement: each,
+                              namespacePrefix: rootNamespacePrefix,
+                              namespaces: namespaces
+                      ),
                       originElement["contract"] == "holding-contract",
-                      let functionElement = XMLHandler.getFunctionElement(fromOriginElement: originElement, namespacePrefix: rootNamespacePrefix, namespaces: namespaces) {
-                fields[id] = AssetAttribute(attribute: each, functionElement: functionElement, rootNamespacePrefix: rootNamespacePrefix, namespaces: namespaces)
+                      let javascriptElement = XMLHandler.getJavascriptElement(
+                              fromOriginElement: originElement,
+                              namespacePrefix: rootNamespacePrefix,
+                              namespaces: namespaces
+                      ),
+                      let functionElement = XMLHandler.getFunctionElement(
+                              fromOriginElement: originElement,
+                              namespacePrefix: rootNamespacePrefix,
+                              namespaces: namespaces
+                      )
+            {
+                        functionElement.addNextSibling(javascriptElement)
+                        fields[id] = AssetAttribute(
+                                attribute: each,
+                                functionElement: functionElement,
+                                rootNamespacePrefix: rootNamespacePrefix,
+                                namespaces: namespaces
+                        )
             }
         }
         return fields
@@ -253,6 +273,10 @@ extension XMLHandler {
 
     fileprivate static func getFunctionElement(fromOriginElement originElement: XMLElement, namespacePrefix: String, namespaces: [String: String]) -> XMLElement? {
         return originElement.at_xpath("function".addToXPath(namespacePrefix: namespacePrefix), namespaces: namespaces)
+    }
+
+    fileprivate static func getJavascriptElement(fromOriginElement originElement: XMLElement, namespacePrefix: String, namespaces: [String: String]) -> XMLElement? {
+        return originElement.at_xpath("script".addToXPath(namespacePrefix: namespacePrefix), namespaces: namespaces)
     }
 
     fileprivate static func getNameElement(fromContractElement contractElement: XMLElement?, namespacePrefix: String, namespaces: [String: String], lang: String) -> XMLElement? {
