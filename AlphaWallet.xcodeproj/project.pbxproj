@@ -391,8 +391,8 @@
 		5E7C7A4384A8E3F22D3F8249 /* SetSellTokensCardExpiryDateViewControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C700CD3E43689E88FBE9B /* SetSellTokensCardExpiryDateViewControllerViewModel.swift */; };
 		5E7C7A67B6143DFB9B1CF02B /* ConfirmSignMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C7DD9C564F2C7DE435894 /* ConfirmSignMessageTableViewCell.swift */; };
 		5E7C7A6C28C59DB62DEE2D63 /* BookmarkViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C706658D72CC1C8BB698C /* BookmarkViewCell.swift */; };
-		5E7C7A6E4C1AEFED0B0630A6 /* TokenViewControllerTransactionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C7B5838E12930000D5029 /* TokenViewControllerTransactionCellViewModel.swift */; };
 		5E7C7A6CC21C553CD4008F14 /* DappButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C75E7D995ABE0E6B7AD55 /* DappButton.swift */; };
+		5E7C7A6E4C1AEFED0B0630A6 /* TokenViewControllerTransactionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C7B5838E12930000D5029 /* TokenViewControllerTransactionCellViewModel.swift */; };
 		5E7C7A91D0F6CBDA3C89DEAC /* LocaleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C79E3BC4CACB123840A42 /* LocaleViewCell.swift */; };
 		5E7C7A928412AF3E16CDA038 /* AmountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C73D0DCE61EA2DE2DA21D /* AmountTextField.swift */; };
 		5E7C7A9D757269A9386B9F1F /* ContractERC20Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7C7E81029EED4B560DA523 /* ContractERC20Transfer.swift */; };
@@ -990,9 +990,9 @@
 		5E7C79778E4BFE1322711EA6 /* LocaleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleViewModel.swift; sourceTree = "<group>"; };
 		5E7C7981AB6584B25C72D46B /* LockEnterPasscodeCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockEnterPasscodeCoordinator.swift; sourceTree = "<group>"; };
 		5E7C7982FA14CBFDFD93B3D0 /* AssetDefinitionStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetDefinitionStore.swift; sourceTree = "<group>"; };
-		5E7C79C2CA884C78B24A97FB /* TokenViewControllerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenViewControllerHeaderView.swift; sourceTree = "<group>"; };
 		5E7C799836611BEE66000EE1 /* DappsHomeHeaderViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeHeaderViewViewModel.swift; sourceTree = "<group>"; };
 		5E7C799D2B7D91072FC0050B /* DappsHomeViewControllerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DappsHomeViewControllerHeaderView.swift; sourceTree = "<group>"; };
+		5E7C79C2CA884C78B24A97FB /* TokenViewControllerHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenViewControllerHeaderView.swift; sourceTree = "<group>"; };
 		5E7C79D674D45A07E694CE31 /* LockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		5E7C79E3BC4CACB123840A42 /* LocaleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocaleViewCell.swift; sourceTree = "<group>"; };
 		5E7C79ED9F842D3FC102AC54 /* TokenViewCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenViewCellViewModel.swift; sourceTree = "<group>"; };
@@ -1017,8 +1017,8 @@
 		5E7C7B1FB2702A2A8A4EBD76 /* SettingsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsCoordinator.swift; sourceTree = "<group>"; };
 		5E7C7B29A9E728402D144C05 /* AppLocale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppLocale.swift; sourceTree = "<group>"; };
 		5E7C7B3302309706CA0F972A /* TokensViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokensViewController.swift; sourceTree = "<group>"; };
-		5E7C7B5838E12930000D5029 /* TokenViewControllerTransactionCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenViewControllerTransactionCellViewModel.swift; sourceTree = "<group>"; };
 		5E7C7B54826BFDD53DF3E5BF /* DiscoverDappCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverDappCell.swift; sourceTree = "<group>"; };
+		5E7C7B5838E12930000D5029 /* TokenViewControllerTransactionCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenViewControllerTransactionCellViewModel.swift; sourceTree = "<group>"; };
 		5E7C7B6380E6EB88AF8810CD /* ConfirmSignMessageViewControllerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSignMessageViewControllerViewModel.swift; sourceTree = "<group>"; };
 		5E7C7B6FAFE62FBAADB85228 /* Web3Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Web3Error.swift; sourceTree = "<group>"; };
 		5E7C7B7A45EDFA8ED1E25863 /* SendHeaderViewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendHeaderViewViewModel.swift; sourceTree = "<group>"; };
