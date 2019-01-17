@@ -48,6 +48,12 @@ public struct Constants {
     public static let kovanEtherscanAPI = "https://api-kovan.etherscan.io/api?module=account&action=txlist&address="
     public static let rinkebyEtherscanAPI = "https://rinkeby.etherscan.io/api?module=account&action=txlist&address="
 
+    //xDai APIs
+    public static let xDaiAPI = "https://blockscout.com/poa/dai/"
+
+    //xDai contract page
+    public static let xDaiContractPage = "https://blockscout.com/poa/dai/address/"
+
     //etherscan contract details web page
     public static let mainnetEtherscanContractDetailsWebPageURL = "https://etherscan.io/address/"
     public static let kovanEtherscanContractDetailsWebPageURL = "https://kovan.etherscan.io/address/"
@@ -63,6 +69,7 @@ public struct Constants {
     public static let ENSRegistrarAddress = EthereumAddress("0x314159265dD8dbb310642f98f50C066173C1259b")!
     public static let ENSRegistrarRopsten = EthereumAddress("0x112234455c3a32fd11230c42e7bccd4a84e02010")!
     public static let ENSRegistrarRinkeby = EthereumAddress("0xe7410170f87102df0055eb195163a03b7f2bff4a")!
+    public static let ENSRegistrarXDAI = EthereumAddress("0x17734f3709486b1d7015f941c069cebf8017a833")!
 
     //Misc
     public static let etherReceivedNotificationIdentifier = "etherReceivedNotificationIdentifier"

@@ -88,6 +88,7 @@ struct Config {
             case .rinkeby: return "https://rinkeby.infura.io/llyrtzQ3YhkdESt2Fzrk"
             case .poa: return "https://core.poa.network"
             case .sokol: return "https://sokol.poa.network"
+            case .xDai: return "https://dai.poa.network"
             case .custom(let custom):
                 return custom.endpoint
             }
@@ -101,10 +102,11 @@ struct Config {
             case .main: return "https://api.etherscan.io"
             case .classic: return "https://classic.trustwalletapp.com"
             case .callisto: return "https://callisto.trustwalletapp.com"
-            case .kovan: return "https://kovan.trustwalletapp.com"
+            case .kovan: return "https://api-kovan.etherscan.io"
             case .ropsten: return "https://api-ropsten.etherscan.io"
             case .rinkeby: return "https://api-rinkeby.etherscan.io"
             case .poa: return "https://poa.trustwalletapp.com"
+            case .xDai: return "https://blockscout.com/poa/dai/api"
             case .sokol: return "https://trust-sokol.herokuapp.com"
             case .custom:
                 return "" // Enable? make optional
@@ -118,6 +120,7 @@ struct Config {
         case .main: return Constants.ENSRegistrarAddress
         case .ropsten: return Constants.ENSRegistrarRopsten
         case .rinkeby: return Constants.ENSRegistrarRinkeby
+        case .xDai: return Constants.ENSRegistrarXDAI
         default: return Constants.ENSRegistrarAddress
         }
     }
