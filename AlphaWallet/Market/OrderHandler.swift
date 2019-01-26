@@ -13,6 +13,7 @@ public struct Order {
     var count: Int
     var tokenIds: [BigUInt]?
     var spawnable: Bool
+    var xdaiDrop: Bool
 }
 
 public struct SignedOrder {

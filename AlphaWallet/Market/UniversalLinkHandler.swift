@@ -33,6 +33,7 @@ private enum LinkFormat: UInt8 {
     case normal = 0x01
     case spawnable = 0x02
     case customizable = 0x03
+    case xDAILink = 0x04
 }
 
 extension Array {
@@ -85,6 +86,8 @@ public class UniversalLinkHandler {
                 return handleSpawnableLink(linkBytes: linkBytes)
             case .customizable:
                 return handleSpawnableLink(linkBytes: linkBytes)
+            case .xDAILink:
+                return handleXDAIDropLinks(linkBytes: linkBytes)
             }
         } else {
             return nil
@@ -106,7 +109,34 @@ public class UniversalLinkHandler {
                 start: BigUInt("0")!,
                 count: tokenIndices.count,
                 tokenIds: [],
-                spawnable: false
+                spawnable: false,
+                xdaiDrop: false
+        )
+        let message = getMessageFromOrder(order: order)
+        return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
+    }
+
+    private func handleXDAIDropLinks(linkBytes: [UInt8]) -> SignedOrder {
+        var bytes = linkBytes
+        bytes.remove(at: 0)//remove encoding byte
+        //TODO add values to message in function
+        let nonce = Array(bytes[0...3])
+        let amount = Array(bytes[4...7])
+        let expiry = Array(bytes[12...15])
+        let contractAddress = Array(bytes[16...35])
+        let v = Data(bytes: Array(bytes[36...37])).hexEncodedString()
+        let r = Data(bytes: Array(bytes[38...69])).hexEncodedString()
+        let s = Data(bytes: Array(bytes[70...102])).hexEncodedString()
+        let order = Order(
+                price: BigUInt(0),
+                indices: [UInt16](),
+                expiry: BigUInt(Data(bytes: expiry)),
+                contractAddress: Data(bytes: contractAddress).hexEncodedString(),
+                start: 0,
+                count: 0,
+                tokenIds: nil,
+                spawnable: false,
+                xdaiDrop: true
         )
         let message = getMessageFromOrder(order: order)
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
@@ -128,7 +158,8 @@ public class UniversalLinkHandler {
             start: BigUInt(0),
             count: tokenIds.count,
             tokenIds: tokenIds,
-            spawnable: true
+            spawnable: true,
+            xdaiDrop: false
         )
         let message = getMessageFromOrder(order: order)
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
@@ -329,4 +360,14 @@ public class UniversalLinkHandler {
         return padded
     }
 
+}
+
+extension Data {
+    static let hexAlphabet = "0123456789abcdef".unicodeScalars.map { $0 }
+    public func hexEncodedString() -> String {
+        return String(self.reduce(into: "".unicodeScalars, { (result, value) in
+            result.append(Data.hexAlphabet[Int(value/16)])
+            result.append(Data.hexAlphabet[Int(value%16)])
+        }))
+    }
 }

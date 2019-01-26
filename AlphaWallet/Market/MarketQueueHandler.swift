@@ -60,7 +60,8 @@ public class MarketQueueHandler {
                 start: BigUInt(orderObj["start"].string!)!,
                 count: orderObj["count"].intValue,
                 tokenIds: [BigUInt](),
-                spawnable: false
+                spawnable: false,
+                xdaiDrop: false
         )
         let signedOrder = SignedOrder(
                 order: order,
