@@ -283,8 +283,8 @@ class TokensCardCoordinator: NSObject, Coordinator {
             indices: tokenHolder.indices,
             expiry: BigUInt(Int(linkExpiryDate.timeIntervalSince1970)),
             contractAddress: tokenHolder.contractAddress,
-            start: BigUInt("0")!,
-            count: tokenHolder.indices.count,
+            count: BigUInt(tokenHolder.indices.count),
+            nonce: BigUInt(0),
             tokenIds: [BigUInt](),
             spawnable: false,
             xdaiDrop: false
@@ -309,8 +309,8 @@ class TokensCardCoordinator: NSObject, Coordinator {
                 indices: tokenHolder.indices,
                 expiry: BigUInt(Int(linkExpiryDate.timeIntervalSince1970)),
                 contractAddress: tokenHolder.contractAddress,
-                start: BigUInt("0")!,
-                count: tokenHolder.indices.count,
+                count: BigUInt(tokenHolder.indices.count),
+                nonce: BigUInt(0),
                 tokenIds: [BigUInt](),
                 spawnable: false,
                 xdaiDrop: false

@@ -8,9 +8,8 @@ public struct Order {
     var indices: [UInt16]
     var expiry: BigUInt
     var contractAddress: String
-    //for mapping to server
-    var start: BigUInt
-    var count: Int
+    var count: BigUInt
+    var nonce: BigUInt
     var tokenIds: [BigUInt]?
     var spawnable: Bool
     var xdaiDrop: Bool

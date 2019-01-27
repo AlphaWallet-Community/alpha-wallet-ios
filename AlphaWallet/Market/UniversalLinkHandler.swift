@@ -106,8 +106,8 @@ public class UniversalLinkHandler {
                 indices: tokenIndices,
                 expiry: expiry,
                 contractAddress: contractAddress,
-                start: BigUInt("0")!,
-                count: tokenIndices.count,
+                count: BigUInt(tokenIndices.count),
+                nonce: BigUInt(0),
                 tokenIds: [],
                 spawnable: false,
                 xdaiDrop: false
@@ -118,27 +118,33 @@ public class UniversalLinkHandler {
 
     private func handleXDAIDropLinks(linkBytes: [UInt8]) -> SignedOrder {
         var bytes = linkBytes
-        bytes.remove(at: 0)//remove encoding byte
-        //TODO add values to message in function
-        let nonce = Array(bytes[0...3])
-        let amount = Array(bytes[4...7])
-        let expiry = Array(bytes[12...15])
-        let contractAddress = Array(bytes[16...35])
-        let v = Data(bytes: Array(bytes[36...37])).hexEncodedString()
-        let r = Data(bytes: Array(bytes[38...69])).hexEncodedString()
-        let s = Data(bytes: Array(bytes[70...102])).hexEncodedString()
+        bytes.remove(at: 0) //remove encoding byte
+        let prefix = Array(bytes[0...7])
+        let nonce = Array(bytes[8...11])
+        let amount = Array(bytes[12...15])
+        let expiry = Array(bytes[16...19])
+        let contractAddress = Array(bytes[20...39])
+        let s = Data(bytes: Array(bytes[40...71])).hexEncodedString()
+        let r = Data(bytes: Array(bytes[72...103])).hexEncodedString()
+        let v = String(bytes[104], radix: 16)
         let order = Order(
                 price: BigUInt(0),
                 indices: [UInt16](),
                 expiry: BigUInt(Data(bytes: expiry)),
                 contractAddress: Data(bytes: contractAddress).hexEncodedString(),
-                start: 0,
-                count: 0,
-                tokenIds: nil,
+                count: BigUInt(Data(bytes: amount)),
+                nonce: BigUInt(Data(bytes: nonce)),
+                tokenIds: [BigUInt](),
                 spawnable: false,
                 xdaiDrop: true
         )
-        let message = getMessageFromOrder(order: order)
+        let message = getMessageFromXDAILink(
+                prefix: prefix,
+                nonce: nonce,
+                amount: amount,
+                expiry: expiry,
+                contractAddress: contractAddress
+        )
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
     }
     
@@ -155,8 +161,8 @@ public class UniversalLinkHandler {
             indices: [UInt16](),
             expiry: expiry,
             contractAddress: contractAddress,
-            start: BigUInt(0),
-            count: tokenIds.count,
+            count: BigUInt(tokenIds.count),
+            nonce: BigUInt(0),
             tokenIds: tokenIds,
             spawnable: true,
             xdaiDrop: false
@@ -327,6 +333,32 @@ public class UniversalLinkHandler {
         }
         
         return (v, r, s)
+    }
+
+    private func getMessageFromXDAILink(
+            prefix: [UInt8],
+            nonce: [UInt8],
+            amount: [UInt8],
+            expiry: [UInt8],
+            contractAddress: [UInt8]
+    ) -> [UInt8] {
+        var message = [UInt8]()
+        for i in 0...7 {
+            message.append(prefix[i])
+        }
+        for i in 0...3 {
+            message.append(nonce[i])
+        }
+        for i in 0...3 {
+            message.append(amount[i])
+        }
+        for i in 0...3 {
+            message.append(expiry[i])
+        }
+        for i in 0...19 {
+            message.append(contractAddress[i])
+        }
+        return message
     }
     
     //price and expiry need to be 32 bytes each
