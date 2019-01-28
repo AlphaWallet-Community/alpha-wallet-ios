@@ -33,7 +33,7 @@ private enum LinkFormat: UInt8 {
     case normal = 0x01
     case spawnable = 0x02
     case customizable = 0x03
-    case xDAILink = 0x04
+    case nativeCurrencyLink = 0x04
 }
 
 extension Array {
@@ -86,8 +86,8 @@ public class UniversalLinkHandler {
                 return handleSpawnableLink(linkBytes: linkBytes)
             case .customizable:
                 return handleSpawnableLink(linkBytes: linkBytes)
-            case .xDAILink:
-                return handleXDAIDropLinks(linkBytes: linkBytes)
+            case .nativeCurrencyLink:
+                return handleNativeCurrencyDropLinks(linkBytes: linkBytes)
             }
         } else {
             return nil
@@ -116,7 +116,7 @@ public class UniversalLinkHandler {
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
     }
 
-    private func handleXDAIDropLinks(linkBytes: [UInt8]) -> SignedOrder {
+    private func handleNativeCurrencyDropLinks(linkBytes: [UInt8]) -> SignedOrder {
         var bytes = linkBytes
         bytes.remove(at: 0) //remove encoding byte
         let prefix = Array(bytes[0...7])
@@ -138,7 +138,7 @@ public class UniversalLinkHandler {
                 spawnable: false,
                 xdaiDrop: true
         )
-        let message = getMessageFromXDAILink(
+        let message = getMessageFromNativeCurrencyDropLink(
                 prefix: prefix,
                 nonce: nonce,
                 amount: amount,
@@ -335,7 +335,7 @@ public class UniversalLinkHandler {
         return (v, r, s)
     }
 
-    private func getMessageFromXDAILink(
+    private func getMessageFromNativeCurrencyDropLink(
             prefix: [UInt8],
             nonce: [UInt8],
             amount: [UInt8],
