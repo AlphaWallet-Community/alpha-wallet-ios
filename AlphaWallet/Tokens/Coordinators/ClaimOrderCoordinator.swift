@@ -33,7 +33,7 @@ class ClaimOrderCoordinator {
             claimSpawnableOrder(expiry: expiry, tokenIds: tokenIds, v: v, r: r, s: s, recipient: recipient) { result in
                 completion(result)
             }
-        } else if signedOrder.order.xdaiDrop {
+        } else if signedOrder.order.nativeCurrencyDrop {
             claimNativeCurrency(signedOrder: signedOrder, v: v, r: r, s: s, recipient: recipient) { result in
                 completion(result)
             }

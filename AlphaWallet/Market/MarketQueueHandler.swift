@@ -61,7 +61,7 @@ public class MarketQueueHandler {
                 nonce: BigUInt(0),
                 tokenIds: [BigUInt](),
                 spawnable: false,
-                xdaiDrop: false
+                nativeCurrencyDrop: false
         )
         let signedOrder = SignedOrder(
                 order: order,

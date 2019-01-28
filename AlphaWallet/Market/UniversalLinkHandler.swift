@@ -110,7 +110,7 @@ public class UniversalLinkHandler {
                 nonce: BigUInt(0),
                 tokenIds: [],
                 spawnable: false,
-                xdaiDrop: false
+                nativeCurrencyDrop: false
         )
         let message = getMessageFromOrder(order: order)
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
@@ -136,7 +136,7 @@ public class UniversalLinkHandler {
                 nonce: BigUInt(Data(bytes: nonce)),
                 tokenIds: [BigUInt](),
                 spawnable: false,
-                xdaiDrop: true
+                nativeCurrencyDrop: true
         )
         let message = getMessageFromNativeCurrencyDropLink(
                 prefix: prefix,
@@ -165,7 +165,7 @@ public class UniversalLinkHandler {
             nonce: BigUInt(0),
             tokenIds: tokenIds,
             spawnable: true,
-            xdaiDrop: false
+            nativeCurrencyDrop: false
         )
         let message = getMessageFromOrder(order: order)
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)

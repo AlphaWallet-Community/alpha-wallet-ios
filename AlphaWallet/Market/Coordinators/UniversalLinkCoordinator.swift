@@ -150,7 +150,7 @@ class UniversalLinkCoordinator: Coordinator {
         case .success(let ethereumAddress):
             guard let recoverAddress = Address(string: ethereumAddress.address) else { return false }
             let contractAsAddress = Address(string: signedOrder.order.contractAddress)!
-            if signedOrder.order.xdaiDrop {
+            if signedOrder.order.nativeCurrencyDrop {
                 self.makeTokenHolder([""], signedOrder.order.contractAddress)
                 completeOrderHandling(signedOrder: signedOrder, isStormBirdContract: isStormBirdContract)
                 return true

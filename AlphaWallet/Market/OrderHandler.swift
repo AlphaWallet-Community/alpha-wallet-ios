@@ -12,7 +12,7 @@ public struct Order {
     var nonce: BigUInt
     var tokenIds: [BigUInt]?
     var spawnable: Bool
-    var xdaiDrop: Bool
+    var nativeCurrencyDrop: Bool
 }
 
 public struct SignedOrder {

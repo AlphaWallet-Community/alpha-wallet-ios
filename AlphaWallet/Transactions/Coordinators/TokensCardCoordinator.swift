@@ -287,7 +287,7 @@ class TokensCardCoordinator: NSObject, Coordinator {
             nonce: BigUInt(0),
             tokenIds: [BigUInt](),
             spawnable: false,
-            xdaiDrop: false
+            nativeCurrencyDrop: false
         )
         let orders = [order]
         let address = keystore.recentlyUsedWallet?.address
@@ -313,7 +313,7 @@ class TokensCardCoordinator: NSObject, Coordinator {
                 nonce: BigUInt(0),
                 tokenIds: [BigUInt](),
                 spawnable: false,
-                xdaiDrop: false
+                nativeCurrencyDrop: false
         )
         let orders = [order]
         let address = keystore.recentlyUsedWallet?.address
