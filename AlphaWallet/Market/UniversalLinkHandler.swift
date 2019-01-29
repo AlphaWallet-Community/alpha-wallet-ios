@@ -116,6 +116,8 @@ public class UniversalLinkHandler {
         return SignedOrder(order: order, message: message, signature: "0x" + r + s + v)
     }
 
+    //Note: native currency links can use szabo directly and
+    //don't need to be compressed into szabo from wei and vice versa
     private func handleNativeCurrencyDropLinks(linkBytes: [UInt8]) -> SignedOrder {
         var bytes = linkBytes
         bytes.remove(at: 0) //remove encoding byte
@@ -124,14 +126,14 @@ public class UniversalLinkHandler {
         let amount = Array(bytes[12...15])
         let expiry = Array(bytes[16...19])
         let contractAddress = Array(bytes[20...39])
-        let s = Data(bytes: Array(bytes[40...71])).hexEncodedString()
-        let r = Data(bytes: Array(bytes[72...103])).hexEncodedString()
         let v = String(bytes[104], radix: 16)
+        let r = Data(bytes: Array(bytes[72...103])).hex()
+        let s = Data(bytes: Array(bytes[40...71])).hex()
         let order = Order(
                 price: BigUInt(0),
                 indices: [UInt16](),
                 expiry: BigUInt(Data(bytes: expiry)),
-                contractAddress: Data(bytes: contractAddress).hexEncodedString(),
+                contractAddress: Data(bytes: contractAddress).hex(),
                 count: BigUInt(Data(bytes: amount)),
                 nonce: BigUInt(Data(bytes: nonce)),
                 tokenIds: [BigUInt](),
@@ -216,18 +218,9 @@ public class UniversalLinkHandler {
         let priceSzabo = priceInt / 1000000000000
         var priceBytes = formatTo4Bytes(priceSzabo.serialize().bytes)
         var expiryBytes = formatTo4Bytes(expiryInt.serialize().bytes)
-        for i in 0...3 {
-            messageWithSzabo.append(priceBytes[i])
-        }
-        for i in 0...3 {
-            messageWithSzabo.append(expiryBytes[i])
-        }
-        for i in 64...83 {
-            messageWithSzabo.append(message[i])
-        }
-        for i in 0..<indices.count {
-            messageWithSzabo.append(indices[i])
-        }
+        messageWithSzabo.append(contentsOf: priceBytes)
+        messageWithSzabo.append(contentsOf: expiryBytes)
+        messageWithSzabo.append(contentsOf: indices)
         messageWithSzabo.insert(LinkFormat.normal.rawValue, at: 0)
         return MarketQueueHandler.bytesToHexa(messageWithSzabo)
     }
@@ -254,21 +247,14 @@ public class UniversalLinkHandler {
     }
 
     private func getPriceFromLinkBytes(linkBytes: [UInt8]) -> BigUInt {
-        var priceBytes = [UInt8]()
-        for i in 0...3 {
-            //price in szabo
-            priceBytes.append(linkBytes[i])
-        }
+        let priceBytes = Array(linkBytes[0...3])
         let priceHex = MarketQueueHandler.bytesToHexa(priceBytes)
         let price = BigUInt(priceHex, radix: 16)!
         return price * 1000000000000
     }
 
     private func getExpiryFromLinkBytes(linkBytes: [UInt8]) -> BigUInt {
-        var expiryBytes = [UInt8]()
-        for i in 4...7 {
-            expiryBytes.append(linkBytes[i])
-        }
+        let expiryBytes = Array(linkBytes[4...7])
         let expiry = MarketQueueHandler.bytesToHexa(expiryBytes)
         return BigUInt(expiry, radix: 16)!
     }
@@ -343,21 +329,11 @@ public class UniversalLinkHandler {
             contractAddress: [UInt8]
     ) -> [UInt8] {
         var message = [UInt8]()
-        for i in 0...7 {
-            message.append(prefix[i])
-        }
-        for i in 0...3 {
-            message.append(nonce[i])
-        }
-        for i in 0...3 {
-            message.append(amount[i])
-        }
-        for i in 0...3 {
-            message.append(expiry[i])
-        }
-        for i in 0...19 {
-            message.append(contractAddress[i])
-        }
+        message.append(contentsOf: prefix)
+        message.append(contentsOf: nonce)
+        message.append(contentsOf: amount)
+        message.append(contentsOf: expiry)
+        message.append(contentsOf: contractAddress)
         return message
     }
     
@@ -366,21 +342,13 @@ public class UniversalLinkHandler {
         var message = [UInt8]()
         //encode price and expiry first
         let priceBytes = padTo32(order.price.serialize().array)
-        for i in 0...31 {
-            message.append(priceBytes[i])
-        }
+        message.append(contentsOf: priceBytes)
         let expiryBytes = padTo32(order.expiry.serialize().array)
-        for i in 0...31 {
-            message.append(expiryBytes[i])
-        }
+        message.append(contentsOf: expiryBytes)
         let contractBytes = order.contractAddress.hexa2Bytes
-        for i in 0...19 {
-            message.append(contractBytes[i])
-        }
+        message.append(contentsOf: contractBytes)
         let indices = OrderHandler.uInt16ArrayToUInt8(arrayOfUInt16: order.indices)
-        for i in 0..<indices.count {
-            message.append(indices[i])
-        }
+        message.append(contentsOf: indices)
         return message
     }
     
@@ -394,12 +362,3 @@ public class UniversalLinkHandler {
 
 }
 
-extension Data {
-    static let hexAlphabet = "0123456789abcdef".unicodeScalars.map { $0 }
-    public func hexEncodedString() -> String {
-        return String(self.reduce(into: "".unicodeScalars, { (result, value) in
-            result.append(Data.hexAlphabet[Int(value/16)])
-            result.append(Data.hexAlphabet[Int(value%16)])
-        }))
-    }
-}
