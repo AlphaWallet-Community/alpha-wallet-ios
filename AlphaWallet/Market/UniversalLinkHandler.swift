@@ -202,7 +202,7 @@ public class UniversalLinkHandler {
         return indicesBytes
     }
     
-    //shortens price and expiry
+    //formats price and expiry to 4 bytes
     private func formatMessageForLink(signedOrder: SignedOrder) -> String {
         let message = signedOrder.message
         let indices = decodeTokenIndices(indices: signedOrder.order.indices)
@@ -216,11 +216,13 @@ public class UniversalLinkHandler {
         let expiryInt = BigUInt(expiryHex, radix: 16)!
         //change from wei to szabo
         let priceSzabo = priceInt / 1000000000000
-        var priceBytes = formatTo4Bytes(priceSzabo.serialize().bytes)
-        var expiryBytes = formatTo4Bytes(expiryInt.serialize().bytes)
+        let priceBytes = formatTo4Bytes(priceSzabo.serialize().bytes)
+        let expiryBytes = formatTo4Bytes(expiryInt.serialize().bytes)
         messageWithSzabo.append(contentsOf: priceBytes)
         messageWithSzabo.append(contentsOf: expiryBytes)
         messageWithSzabo.append(contentsOf: indices)
+        //contract address
+        messageWithSzabo.append(contentsOf: message[64...83])
         messageWithSzabo.insert(LinkFormat.normal.rawValue, at: 0)
         return MarketQueueHandler.bytesToHexa(messageWithSzabo)
     }
